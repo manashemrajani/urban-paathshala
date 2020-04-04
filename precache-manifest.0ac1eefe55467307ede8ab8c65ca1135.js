@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0366bab0b102242e5f9de0133b6719fa",
+    "revision": "c7eaabc2ae8c8634c41de6df78067f22",
     "url": "/urban-paathshala/index.html"
   },
   {
-    "revision": "781c4d2661cd3632110f",
+    "revision": "3722da01944ae5a76b18",
     "url": "/urban-paathshala/static/css/main.27fd15f6.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/urban-paathshala/static/js/2.6335b169.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "781c4d2661cd3632110f",
-    "url": "/urban-paathshala/static/js/main.bd4c7372.chunk.js"
+    "revision": "3722da01944ae5a76b18",
+    "url": "/urban-paathshala/static/js/main.1c3a5da6.chunk.js"
   },
   {
     "revision": "74d9203bd6f132c5e797",

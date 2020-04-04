@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/urban-paathshala/precache-manifest.41acbedbf80685ac030d52cebb658c8d.js"
+  "/urban-paathshala/precache-manifest.0ac1eefe55467307ede8ab8c65ca1135.js"
 );
 
 self.addEventListener('message', (event) => {
