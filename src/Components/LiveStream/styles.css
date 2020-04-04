@@ -21,7 +21,9 @@
 .title {
     display: flex;
     align-items: center;
-    padding: 0px 20px;
+    padding: 0px 0px 12px;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 20px;
 }
 .heading {
     text-align: center;
@@ -46,7 +48,7 @@ iframe {
 .ans {
     padding: 10px;
     border: 1px solid #e0e0e0;
-    margin: 10px;
+    margin: 10px 10px 10px 0px;
     border-radius: 5px;
 }
 
