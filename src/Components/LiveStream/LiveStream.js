@@ -4,29 +4,39 @@ import './styles.css';
 export default class LiveStream extends Component {
 
     state = {
-        loading: true,
-        questionDisplay: false
+        loading: false,
+        questionDisplay: false,
+        showName: true
     }
 
-    async componentDidMount() {
+    answerValChanged = e => {
+        const ans = e.target.value;
+        this.postAnswer(ans);
+    }
+
+    async getVideoUrl() {
         const url = "https://demo6238992.mockable.io/getVideoUrl";
         const response = await fetch(url);
         const data = await response.json();
-        this.setState({ url: data.videoUrl, loading: false });
-        this.startPolling();
+        return data;
     }
 
-    valChanged = e => {
-        const ans = e.target.value;
-        this.postAnswer(ans);
+    nameChosen = () => {
+        this.setState({showName: false, loading: true});
+        Promise.resolve(this.getVideoUrl()).then(data => {
+            console.log(data)
+            this.setState({ url: data.videoUrl, loading: false });
+            this.startPolling();
+        });
     }
 
 
     async postAnswer(ans) {
         const url = "http://demo9529061.mockable.io/postAnswer";
-        await fetch(url,{method: "post", body: JSON.stringify({chosenAnswer: ans, name: "manas"})});
+        fetch(url,{method: "post", body: JSON.stringify({chosenAnswer: ans, name: this.state.name})});
         this.setState({ questionDisplay: false});
     }
+
     startPolling() {
         setInterval(async () => {
             const url = "http://demo9529061.mockable.io/getQuestions"; // amit wala
@@ -39,6 +49,10 @@ export default class LiveStream extends Component {
         }, 5000)
     }
 
+    setName = (e) => {
+        this.setState({name: e.target.value});
+    }
+    
     render() {
 
         return (
@@ -57,15 +71,20 @@ export default class LiveStream extends Component {
                         Welcome to the LiveStream of Urban Company's - Paathshala
                     </div>
                 </div>
-                {!this.state.loading ?
+                {this.state.showName && <div>
+                    <div>Please enter your Name</div>
+                    <input onChange={this.setName} type="text"></input>
+                    <button onClick={this.nameChosen}>Proceed</button>
+                </div>}
+                {this.state.loading && <div><img className={"uc-spinner-real"} src="https://res.cloudinary.com/urbanclap/image/upload/v1484052239/web-assets/LogoUC.png" alt="Urban Company logo"></img></div>}
+                {this.state.url &&
                     <iframe
                         title="Live Streaming Content"
                         src={this.state.url}
                         className={"iframe"}
                         height="378"
                         width="620"
-                        scrolling="no" /> :
-                    <div><img className={"uc-spinner-real"} src="https://res.cloudinary.com/urbanclap/image/upload/v1484052239/web-assets/LogoUC.png" alt="Urban Company logo"></img></div>
+                        scrolling="no" />
                 }
                 {
                     this.state.questionDisplay && this.state.questions ?
@@ -76,7 +95,7 @@ export default class LiveStream extends Component {
                                     <div className="ans-container">
                                         {obj.answers.map( ans => (
                                             <div className="ans">
-                                                <input onChange= {this.valChanged} type="radio" id={ans} name={obj.question} value={ans} />
+                                                <input onChange= {this.answerValChanged} type="radio" id={ans} name={obj.question} value={ans} />
                                                 <label for={ans}>{ans}</label>                       
                                             </div>
                                         ))}
