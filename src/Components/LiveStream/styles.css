@@ -40,6 +40,22 @@ iframe {
     width: 100%;
     height: 60vh;
 }
+.name-container {
+    display: flex;
+    padding: 20px;
+}
+
+.name-btn {
+    margin-left: 20px;
+}
+
+.name-label {
+
+}
+
+.name-input {
+    margin-left: 20px;
+}
 
 .ans-container {
     display: flex;
@@ -47,6 +63,7 @@ iframe {
 
 .ans {
     padding: 10px;
+    cursor: pointer;
     border: 1px solid #e0e0e0;
     margin: 10px 10px 10px 0px;
     border-radius: 5px;
@@ -54,6 +71,7 @@ iframe {
 
 label {
     margin: 10px;
+    cursor: pointer;
 }
 
 .ques-container {

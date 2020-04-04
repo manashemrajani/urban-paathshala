@@ -11,7 +11,7 @@ export default class LiveStream extends Component {
 
     answerValChanged = e => {
         const ans = e.target.value;
-        this.postAnswer(ans);
+        setTimeout(() => this.postAnswer(ans),200);
     }
 
     async getVideoUrl() {
@@ -46,7 +46,7 @@ export default class LiveStream extends Component {
             if(data.success.data.id !== this.state.id){
                 this.setState({ questions: data.success.data.questions, id: data.success.data.id, questionDisplay: true })
             }
-        }, 5000)
+        }, 2000)
     }
 
     setName = (e) => {
@@ -71,10 +71,10 @@ export default class LiveStream extends Component {
                         Welcome to the LiveStream of Urban Company's - Paathshala
                     </div>
                 </div>
-                {this.state.showName && <div>
-                    <div>Please enter your Name</div>
-                    <input onChange={this.setName} type="text"></input>
-                    <button onClick={this.nameChosen}>Proceed</button>
+                {this.state.showName && <div className="name-container">
+                    <div className="name-label">Please enter your Name:</div>
+                    <input className="name-input" onChange={this.setName} type="text"></input>
+                    <button className="name-btn" onClick={this.nameChosen}>Proceed</button>
                 </div>}
                 {this.state.loading && <div><img className={"uc-spinner-real"} src="https://res.cloudinary.com/urbanclap/image/upload/v1484052239/web-assets/LogoUC.png" alt="Urban Company logo"></img></div>}
                 {this.state.url &&
