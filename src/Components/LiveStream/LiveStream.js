@@ -4,14 +4,15 @@ import './styles.css';
 export default class LiveStream extends Component {
 
     state = {
-        loading: true
+        loading: true,
+        questionDisplay: false
     }
 
     async componentDidMount() {
         const url = "https://demo6238992.mockable.io/getVideoUrl";
         const response = await fetch(url);
         const data = await response.json();
-        this.setState({ url: data.videoUrl, loading: true });
+        this.setState({ url: data.videoUrl, loading: false });
         this.startPolling();
     }
 
@@ -24,15 +25,18 @@ export default class LiveStream extends Component {
     async postAnswer(ans) {
         const url = "http://demo9529061.mockable.io/postAnswer";
         await fetch(url,{method: "post", body: JSON.stringify({chosenAnswer: ans, name: "manas"})});
+        this.setState({ questionDisplay: false});
     }
     startPolling() {
         setInterval(async () => {
-            // const url = "http://demo9529061.mockable.io/getQuestions"; // amit wala
-            const url = "http://demo6238992.mockable.io/getQuestions"; // mera wala
+            const url = "http://demo9529061.mockable.io/getQuestions"; // amit wala
+            // const url = "http://demo6238992.mockable.io/getQuestions"; // mera wala
             const response = await fetch(url);
             const data = await response.json();
-            this.setState({ questions: data.success.data.questions })
-        }, 15000)
+            if(data.success.data.id !== this.state.id){
+                this.setState({ questions: data.success.data.questions, id: data.success.data.id, questionDisplay: true })
+            }
+        }, 5000)
     }
 
     render() {
@@ -64,7 +68,7 @@ export default class LiveStream extends Component {
                     <div><img className={"uc-spinner-real"} src="https://res.cloudinary.com/urbanclap/image/upload/v1484052239/web-assets/LogoUC.png" alt="Urban Company logo"></img></div>
                 }
                 {
-                    this.state.questions ?
+                    this.state.questionDisplay && this.state.questions ?
                         <div>
                             {this.state.questions.map(obj => (
                                 <div className="ques-container">
