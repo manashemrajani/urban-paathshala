@@ -16,7 +16,7 @@ export default class LiveStream extends Component {
     }
 
     startPolling() {
-        setInterval(async () => {
+        setTimeout(async () => {
             const url = "http://demo9529061.mockable.io/getQuestions";
             const response = await fetch(url);
             const data = await response.json();
@@ -38,7 +38,7 @@ export default class LiveStream extends Component {
             //     }
             // }
             this.setState({ questions: data.success.data.questions })
-        }, 1000)
+        }, 10000)
     }
 
     render() {
@@ -71,11 +71,14 @@ export default class LiveStream extends Component {
                     this.state.questions ?
                         <div>
                             {this.state.questions.map(obj => (
-                                <div>
+                                <div className="ques-container">
                                     <div>Q. {obj.question}</div>
-                                    <div>
+                                    <div className="ans-container">
                                         {obj.answers.map( ans => (
-                                            <div>{ans}</div>
+                                            <div className="ans">
+                                                <input type="radio" id={ans} name={obj.question} value={ans} />
+                                                <label for={ans}>{ans}</label>                       
+                                            </div>
                                         ))}
                                     </div>
                                 </div>
@@ -86,3 +89,7 @@ export default class LiveStream extends Component {
         )
     }
 }
+
+
+
+

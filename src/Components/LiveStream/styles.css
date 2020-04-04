@@ -39,6 +39,24 @@ iframe {
     height: 60vh;
 }
 
+.ans-container {
+    display: flex;
+}
+
+.ans {
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+label {
+    margin: 10px;
+}
+
+.ques-container {
+    padding: 22px;
+}
 @keyframes spin {
     from{
     transform: rotateY(0deg);
